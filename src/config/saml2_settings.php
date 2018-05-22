@@ -71,6 +71,8 @@ return $settings = array(
     // your application is running behind a load balancer which terminates
     // SSL.
     'proxyVars' => false,
+    'port' => 80,
+    'protocol' => 'http',
 
     // Service Provider Data that we are deploying
     'sp' => array(
