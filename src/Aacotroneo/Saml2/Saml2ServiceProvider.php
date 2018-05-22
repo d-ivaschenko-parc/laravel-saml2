@@ -33,6 +33,12 @@ class Saml2ServiceProvider extends ServiceProvider
         if (config('saml2_settings.proxyVars', false)) {
             \OneLogin_Saml2_Utils::setProxyVars(true);
         }
+
+        if(is_numeric(config('saml2_settings.port'))) {
+            \OneLogin_Saml2_Utils::setSelfPort(config('saml2_settings.port'));
+        }
+
+        \OneLogin_Saml2_Utils::setSelfProtocol(config('saml2_settings.protocol'));
     }
 
     /**
