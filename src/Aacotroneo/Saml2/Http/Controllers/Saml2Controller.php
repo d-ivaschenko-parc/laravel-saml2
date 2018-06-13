@@ -13,12 +13,9 @@ class Saml2Controller extends Controller
 
     protected $saml2Auth;
 
-    /**
-     * @param Saml2Auth $saml2Auth injected.
-     */
-    function __construct(Saml2Auth $saml2Auth)
+    function __construct()
     {
-        $this->saml2Auth = $saml2Auth;
+        $this->saml2Auth = resolve(Saml2Auth::class);
     }
 
 
