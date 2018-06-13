@@ -22,9 +22,14 @@ class Saml2Auth
 
     function __construct(OneLogin_Saml2_Auth $auth)
     {
-        $this->auth = $auth;
+        $this->setAuth($auth);
     }
 
+    function setAuth(OneLogin_Saml2_Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+    
     /**
      * @return bool if a valid user was fetched from the saml assertion this request.
      */
