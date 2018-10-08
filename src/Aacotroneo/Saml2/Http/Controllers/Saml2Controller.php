@@ -4,8 +4,8 @@ namespace Aacotroneo\Saml2\Http\Controllers;
 
 use Aacotroneo\Saml2\Events\Saml2LoginEvent;
 use Aacotroneo\Saml2\Saml2Auth;
-use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 
 class Saml2Controller extends Controller
@@ -21,11 +21,11 @@ class Saml2Controller extends Controller
 
     /**
      * Generate local sp metadata
+     *
      * @return \Illuminate\Http\Response
      */
     public function metadata()
     {
-
         $metadata = $this->saml2Auth->getMetadata();
 
         return response($metadata, 200, ['Content-Type' => 'text/xml']);
@@ -56,7 +56,6 @@ class Saml2Controller extends Controller
         if ($redirectUrl !== null) {
             return redirect($redirectUrl);
         } else {
-
             return redirect(config('saml2_settings.loginRoute'));
         }
     }
@@ -91,9 +90,15 @@ class Saml2Controller extends Controller
 
     /**
      * This initiates a login request
+     *
+     * @param Request $request
      */
-    public function login()
+    public function login(Request $request)
     {
+        $redirectUrl = $request->query('back_url');
+        if ($redirectUrl) {
+            config(['saml2_settings.loginRoute' => $redirectUrl]);
+        }
         $this->saml2Auth->login(config('saml2_settings.loginRoute'));
     }
 
